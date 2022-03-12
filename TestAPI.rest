@@ -1,0 +1,20 @@
+
+
+GET https://cse341-scheduler.herokuapp.com/api/get-available
+
+###
+
+GET https://cse341-scheduler.herokuapp.com/api/get-available?doctor=Stevenson
+
+
+###
+
+POST https://cse341-scheduler.herokuapp.com/api/set-appointment-request
+content-type: application/json
+
+{
+    "start": ,
+    "end": "Here I am",
+    "patient": "Joe",
+    "doctor": "Stevenson"
+}
