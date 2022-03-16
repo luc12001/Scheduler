@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
-if(!process.env.PORT){
+const patientRoute = require('./routes/patients')
+
+if (!process.env.PORT) {
     require("dotenv").config();
 }
 
@@ -22,6 +25,15 @@ const options = {
     family: 4
 };
 
+// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
+site.use(bodyParser.json()); // application/json
+
+site.set('view engine', 'ejs');
+site.set('views', 'views');
+
+
+site.use("/patient", patientRoute);
+
 site.use("/", (request, response, next) => {
 
     response.write('<html>');
@@ -31,6 +43,7 @@ site.use("/", (request, response, next) => {
     response.write('</html>');
     return response.end();
 });
+
 
 
 
