@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require('cors');
 
 if(!process.env.PORT){
@@ -21,6 +22,14 @@ site.use(cors(corsOptions));
 const options = {
     family: 4
 };
+
+//Parser
+site.use(express.urlencoded());
+site.use(express.static(path.join(__dirname, "public")));
+
+/*******************************************
+ * Site Router
+ * ****************************************/
 
 site.use("/", (request, response, next) => {
 

@@ -13,8 +13,11 @@ POST https://cse341-scheduler.herokuapp.com/api/set-appointment-request
 content-type: application/json
 
 {
-    "start": ,
-    "end": "Here I am",
+    "start": "2022-03-18T05:28:31.019+00:00",
+    "end": "2022-03-18T05:28:31.019+00:00",
     "patient": "Joe",
     "doctor": "Stevenson"
 }
+
+###
+
