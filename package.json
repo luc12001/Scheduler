@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/luc12001/Scheduler#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-mongodb-session": "^3.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

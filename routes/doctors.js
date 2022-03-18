@@ -6,3 +6,5 @@ const router = express.Router();
 const availabilityController = require('../controllers/availability');
 
 router.get('/doctors', availabilityController.calendar);
+
+module.exports = router;
