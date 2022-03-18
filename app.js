@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require("express");
+const path = require("path");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -39,6 +40,14 @@ site.use("/admin", adminRoute);
 
 //doctors Route
 site.use("/doctors", doctorsRoute);
+
+//Parser
+site.use(express.urlencoded());
+site.use(express.static(path.join(__dirname, "public")));
+
+/*******************************************
+ * Site Router
+ * ****************************************/
 
 site.use("/", (request, response, next) => {
 
