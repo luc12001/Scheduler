@@ -13,3 +13,5 @@ userSchema.methods.getAvailabilities = function() {}
 userSchema.methods.getAvailability = function(doctorName) {}
 
 userSchema.methods.assignRole = function(userID, newRole) {}
+
+module.exports = mongoose.model("User", userSchema);

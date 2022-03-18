@@ -9,3 +9,6 @@ const availabilitySchema = new mongoose.Schema({
 });
 
 availabilitySchema.methods.updateAppointment = function(availability){}
+
+
+module.exports = mongoose.model("Availability", availabilitySchema);

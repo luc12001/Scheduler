@@ -15,3 +15,5 @@ appointmentSchema.methods.aproveRequest = function(appointment, isAproved){}
 appointmentSchema.methods.updateAppointment = function(appointment){}
 
 appointmentSchema.methods.updateAppointmentRequest = function(apointment){}
+
+module.exports = mongoose.model("Appointment", appointmentSchema);

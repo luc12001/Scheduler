@@ -7,3 +7,5 @@ const notesSchema = new mongoose.Schema({
     //This is where the layout of the user object will go
 
 });
+
+module.exports = mongoose.model("Notes", notesSchema);
