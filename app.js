@@ -1,7 +1,13 @@
+const path = require('path');
 const express = require("express");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
-if(!process.env.PORT){
+const adminRoute = require('./routes/admin');
+
+const doctorsRoute = require('./routes/doctors');
+
+if (!process.env.PORT) {
     require("dotenv").config();
 }
 
@@ -21,6 +27,18 @@ site.use(cors(corsOptions));
 const options = {
     family: 4
 };
+site.use(bodyParser.json());
+
+site.set('view engine', 'ejs');
+site.set('views', 'views');
+
+/* site.use(express.static(path.join(__dirname + '/views'))); */
+
+//admin Route
+site.use("/admin", adminRoute);
+
+//doctors Route
+site.use("/doctors", doctorsRoute);
 
 site.use("/", (request, response, next) => {
 
