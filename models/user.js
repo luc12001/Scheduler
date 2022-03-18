@@ -8,9 +8,9 @@ const userSchema = new mongoose.Schema({
 
 });
 
-userSchema.methods.getAvailabilities = function() {}
-
-userSchema.methods.getAvailability = function(doctorName) {}
+userSchema.static.getDoctorsList = function(){
+    return this.find({});
+}
 
 userSchema.methods.assignRole = function(userID, newRole) {}
 
