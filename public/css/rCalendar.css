@@ -1,0 +1,127 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-size: 100%;
+    line-height: 1.5;
+    font-family: "Roboto Condensed", sans-serif;
+    background: floralwhite;
+    background-image: linear-gradient(floralwhite 0%, darken(floralwhite, 12%) 100%);
+    color: black;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: baseline;
+}
+
+a {
+    text-decoration: none;
+}
+
+.calendar-wrapper {
+    width: 360px;
+    margin: 3em auto;
+    padding: 2em;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: black;
+}
+
+table {
+    max-width: 100%;
+    clear: both;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 3px;
+    border-collapse: collapse;
+    color: grey;
+}
+
+td {
+    height: 48px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    width: 100% / 7;
+}
+
+td.not-current {
+    color: grey;
+    ;
+}
+
+td.normal:hover {
+    cursor: pointer;
+    background-color: #1459ee;
+}
+
+td.today {
+    font-weight: 700;
+    color: black;
+    font-size: 1.5em;
+}
+
+thead td {
+    border: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+#btnPrev {
+    float: left;
+    margin-bottom: 20px;
+}
+
+#btnPrev:before {
+    content: '\f104';
+    font-family: FontAwesome;
+    padding-right: 4px;
+}
+
+#btnNext {
+    float: right;
+    margin-bottom: 20px;
+}
+
+#btnNext:after {
+    content: '\f105';
+    font-family: FontAwesome;
+    padding-left: 4px;
+}
+
+#btnPrev,
+#btnNext {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    cursor: pointer;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+#btnPrev:hover,
+#btnNext:hover {
+    color: black;
+    font-weight: bold;
+}
