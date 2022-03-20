@@ -2,10 +2,19 @@ const path = require('path');
 const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-const adminRoute = require('./routes/admin');
+//Models
+const notes = require('./models/notes');
 
+//Routes
+const receptionRoute = require('./routes/receptionists');
 const doctorsRoute = require('./routes/doctors');
+
+//DB connection
+/* const MONGODB_URI =
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dmgfy.mongodb.net/test`; */
+
 
 if (!process.env.PORT) {
     require("dotenv").config();
@@ -35,13 +44,13 @@ site.set('views', 'views');
 /* site.use(express.static(path.join(__dirname + '/views'))); */
 
 //admin Route
-site.use("/admin", adminRoute);
+site.use("/receptionists", receptionRoute);
 
 //doctors Route
 site.use("/doctors", doctorsRoute);
 
 //Parser
-site.use(express.urlencoded());
+//site.use(express.urlencoded());
 site.use(express.static(path.join(__dirname, "public")));
 
 /*******************************************
@@ -60,4 +69,13 @@ site.use("/", (request, response, next) => {
 
 
 
-site.listen(PORT);
+//site.listen(PORT);
+
+mongoose
+    .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dmgfy.mongodb.net/test`)
+    .then(result => {
+        site.listen(3000);
+    })
+    .catch(err => {
+        console.log(err);
+    });

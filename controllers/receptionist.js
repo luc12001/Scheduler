@@ -1,5 +1,7 @@
 //The logic for receptionist Pages
 
+
+
 exports.cancelAppointment = (req, res, next) => {
     const patientId = req.params.patientId;
     Patient.findById(patientId)
@@ -70,7 +72,10 @@ exports.editAppointment = (req, res, next) => {
         });
 };
 
-exports.setAppointment = (req, res, next) => {};
+exports.setAppointment = (req, res, next) => {
+    //console.log('Receptionist page!!');
+    res.render('users/receptionist');
+};
 
 exports.addUser = (req, res, next) => {};
 

@@ -4,9 +4,9 @@
 
 exports.login = (req, res, next) => {
     //console.log(req);
-    res.render('views/admin/login');
+    res.render('/admin/login');
 }
 
 exports.admin = (req, res, next) => {
-    res.render('views/admin/admin');
+    res.render('/admin/admin');
 }
