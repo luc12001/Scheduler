@@ -31,7 +31,7 @@ exports.logInPost = (req, res, next) => {
             //So we only need to compare hashes.
             let success = await encryption.compare(password, user.password);
             if(success){
-                //req.session.userId = user._id;
+                //req.session.user = user;
                 return response.redirect("/")
             } else {
                 throw "User not found"
@@ -73,5 +73,23 @@ exports.signUpPost = (req, res, next) => {
     const address = req.body.address;
     const phone = req.body.phone;
 
+    User.findOne({username: username})
+    .then(foundUser => {
+        if(foundUser){
+
+        //Error
+        throw new Error("Username already exists");
+        }
+
+        const newUser = new User({
+            username: username,
+            password: await encryption.hash(password, 12),
+            email: email
+        });
+
+
+    }).catch(error => {
+        throw new Error(error);
+    });
 
 };
