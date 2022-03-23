@@ -38,6 +38,18 @@ const options = {
 };
 site.use(bodyParser.json());
 
+//Allow for cross server client access
+site.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
+
 site.set('view engine', 'ejs');
 site.set('views', 'views');
 
@@ -72,7 +84,7 @@ site.use("/", (request, response, next) => {
 //site.listen(PORT);
 
 mongoose
-    .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dmgfy.mongodb.net/test`)
+    .connect(`mongodb+srv://brown18085:Speights1979@cluster0.dmgfy.mongodb.net/test`)
     .then(result => {
         site.listen(3000);
     })
