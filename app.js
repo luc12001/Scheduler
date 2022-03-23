@@ -11,11 +11,6 @@ const notes = require('./models/notes');
 const receptionRoute = require('./routes/receptionists');
 const doctorsRoute = require('./routes/doctors');
 
-//DB connection
-/* const MONGODB_URI =
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dmgfy.mongodb.net/test`; */
-
-
 if (!process.env.PORT) {
     require("dotenv").config();
 }
@@ -84,7 +79,7 @@ site.use("/", (request, response, next) => {
 //site.listen(PORT);
 
 mongoose
-    .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dmgfy.mongodb.net/test`)
+    .connect(proccess.env.MONGODB_URI)
     .then(result => {
         site.listen(3000);
     })

@@ -12,6 +12,8 @@ userSchema.static.getDoctorsList = function(){
     return this.find({});
 }
 
-userSchema.methods.assignRole = function(userID, newRole) {}
+userSchema.methods.assignRole = function(userID, newRole) {
+    
+}
 
 module.exports = mongoose.model("User", userSchema);
