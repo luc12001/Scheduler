@@ -29,8 +29,8 @@ const PORT = process.env.PORT || 3000
 const site = express();
 
 //MongoDB session storage
-const storage = new MongoDBStore({
-    uri: MONGODB_URL,
+const storage = new MongoDBSessions({
+    uri: process.env.MONGODB_URI,
     collection: "sessions"
 });
 
