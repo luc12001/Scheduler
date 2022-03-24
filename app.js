@@ -3,13 +3,22 @@ const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require("express-session");
+const MongoDBSessions = require("connect-mongodb-session")(session);
 
 //Models
 const notes = require('./models/notes');
+const User = require("./models/user");
 
 //Routes
 const receptionRoute = require('./routes/receptionists');
 const doctorsRoute = require('./routes/doctors');
+
+
+
+/*******************************************
+ * Site Initialization
+ * ****************************************/
 
 if (!process.env.PORT) {
     require("dotenv").config();
@@ -17,11 +26,15 @@ if (!process.env.PORT) {
 
 const PORT = process.env.PORT || 3000
 
-/*******************************************
- * Site Startup
- * ****************************************/
 const site = express();
 
+//MongoDB session storage
+const storage = new MongoDBStore({
+    uri: MONGODB_URL,
+    collection: "sessions"
+});
+
+//Site otions
 const corsOptions = {
     origin: "https://cse341-scheduler.herokuapp.com/",
     optionsSuccessStatus: 200
@@ -31,7 +44,18 @@ site.use(cors(corsOptions));
 const options = {
     family: 4
 };
+
+//Parser
 site.use(bodyParser.json());
+site.use(express.static(path.join(__dirname, "public")));
+
+//Session initializer
+site.use(session({
+    secret: process.env.SESSIONKEY,
+    resave: false,
+    saveUninitialized: false,
+    store: storage
+}));
 
 //Allow for cross server client access
 site.use((req, res, next) => {
@@ -48,6 +72,39 @@ site.use((req, res, next) => {
 site.set('view engine', 'ejs');
 site.set('views', 'views');
 
+/*******************************************
+ * Site Session/Default variables initialization
+ * ****************************************/
+
+//Getting user from the session's user ID
+site.use((req, res, next) => {
+    if(!req.session.userId) {
+        request.user = null;
+        return next();
+    }
+
+    User.findById(request.session.userId)
+    .then(foundUser => {
+        // I do it this way so that request.user does exist still
+        if(!foundUser) {
+            request.user = null;
+        } else {
+            request.user = foundUser;
+        }
+        next();
+    }).catch(error => {
+        console.log("Error in finding the user in the database.");
+        console.log(error);
+        request.user = null;
+        return next();
+    });
+    
+});
+
+/*******************************************
+ * Site Routing
+ * ****************************************/
+
 /* site.use(express.static(path.join(__dirname + '/views'))); */
 
 //admin Route
@@ -56,22 +113,19 @@ site.use("/receptionists", receptionRoute);
 //doctors Route
 site.use("/doctors", doctorsRoute);
 
-//Parser
-//site.use(express.urlencoded());
-site.use(express.static(path.join(__dirname, "public")));
 
 /*******************************************
  * Site Router
  * ****************************************/
 
-site.use("/", (request, response, next) => {
+site.use("/", (req, res, next) => {
 
-    response.write('<html>');
-    response.write('<body>');
-    response.write("<h1>Work in Progress</h1>");
-    response.write('</body>');
-    response.write('</html>');
-    return response.end();
+    res.write('<html>');
+    res.write('<body>');
+    res.write("<h1>Work in Progress</h1>");
+    res.write('</body>');
+    res.write('</html>');
+    return res.end();
 });
 
 
@@ -79,10 +133,10 @@ site.use("/", (request, response, next) => {
 //site.listen(PORT);
 
 mongoose
-    .connect(proccess.env.MONGODB_URI)
+    .connect(process.env.MONGODB_URI)
     .then(result => {
         site.listen(3000);
     })
     .catch(err => {
         console.log(err);
-    });
+});
