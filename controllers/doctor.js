@@ -93,12 +93,12 @@ exports.editAvailability = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(422).render('users/doctor/edit-availability', {
+        return res.status(422).render('users/edit-availability', {
             pageTitle: 'Edit Doctor Availability',
-            path: 'users/doctor/edit-availability',
+            path: 'users/edit-availability',
             editing: true,
             hasError: true,
-            appointment: {
+            availability: {
                 doctorName: doctorName,
                 doctorAvailability: doctorAvailability,
                 _id: doctorId
@@ -116,9 +116,9 @@ exports.editAvailability = (req, res, next) => {
             doctor.doctorName = doctorName;
             doctor.doctorNotes = doctorNotes;
             doctor.doctorAvailability = req.body.doctorAvailability;
-            return product.save().then(result => {
+            return doctor.save().then(result => {
                 console.log('UPDATED AVAILABILITY!');
-                res.redirect('users/doctor/edit-availability');
+                res.redirect('users/edit-availability');
             });
         })
         .catch(err => {
@@ -128,18 +128,18 @@ exports.editAvailability = (req, res, next) => {
         });
 };
 
-exports.setAppointment = (req, res, next) => {
+exports.newAppointment = (req, res, next) => {
     const patientId = req.body.patientId;
     const patientName = req.body.patientName;
     const patientNotes = req.body.patientNotes;
     const appTime = req.body.appTime;
     if (!image) {
-        return res.status(422).render('/users/receptionist/setAppointment', {
+        return res.status(422).render('/users/newAppointment', {
             pageTitle: 'Set Appointment',
-            path: '/users/receptionist/setAppointment',
+            path: '/users/newAppointment',
             editing: false,
             hasError: true,
-            product: {
+            appointment: {
                 patientId: patientId,
                 patientName: patientName,
                 patientNotes: patientNotes,
@@ -151,9 +151,9 @@ exports.setAppointment = (req, res, next) => {
 
     if (!errors.isEmpty()) {
         console.log(errors.array());
-        return res.status(422).render('/users/receptionist/setAppointment', {
+        return res.status(422).render('/users/newAppointment', {
             pageTitle: 'Set Appointment',
-            path: '/users/receptionist/setAppointment',
+            path: '/users/newAppointment',
             editing: false,
             hasError: true,
             product: {
@@ -167,7 +167,7 @@ exports.setAppointment = (req, res, next) => {
         });
     }
 
-    const newAppointment = new setAppointment({
+    const newAppointment = new newAppointment({
         patientId: patientId,
         patientName: patientName,
         patientNotes: patientNotes,
@@ -177,7 +177,7 @@ exports.setAppointment = (req, res, next) => {
         .save()
         .then(result => {
             console.log('Appointment Set');
-            res.redirect('/users/receptionist/setAppointment');
+            res.redirect('/users/newAppointment');
         })
         .catch(err => {
             const error = new Error(err);
