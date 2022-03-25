@@ -79,7 +79,7 @@ site.use("/", (request, response, next) => {
 //site.listen(PORT);
 
 mongoose
-    .connect(proccess.env.MONGODB_URI)
+    .connect(process.env.MONGODB_URI)
     .then(result => {
         site.listen(3000);
     })
