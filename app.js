@@ -133,8 +133,9 @@ site.use("/", (req, res, next) => {
 //site.listen(PORT);
 
 mongoose
-    .connect(process.env.MONGODB_URI)
+    .connect(process.env.MONGODB_URI, options)
     .then(result => {
+        console.log("Connected to Database");
         site.listen(3000);
     })
     .catch(err => {
