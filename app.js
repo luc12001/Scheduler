@@ -78,27 +78,27 @@ site.set('views', 'views');
 
 //Getting user from the session's user ID
 site.use((req, res, next) => {
-    if(!req.session.userId) {
+    if (!req.session.userId) {
         request.user = null;
         return next();
     }
 
     User.findById(request.session.userId)
-    .then(foundUser => {
-        // I do it this way so that request.user does exist still
-        if(!foundUser) {
+        .then(foundUser => {
+            // I do it this way so that request.user does exist still
+            if (!foundUser) {
+                request.user = null;
+            } else {
+                request.user = foundUser;
+            }
+            next();
+        }).catch(error => {
+            console.log("Error in finding the user in the database.");
+            console.log(error);
             request.user = null;
-        } else {
-            request.user = foundUser;
-        }
-        next();
-    }).catch(error => {
-        console.log("Error in finding the user in the database.");
-        console.log(error);
-        request.user = null;
-        return next();
-    });
-    
+            return next();
+        });
+
 });
 
 /*******************************************
@@ -133,15 +133,11 @@ site.use("/", (req, res, next) => {
 //site.listen(PORT);
 
 mongoose
-<<<<<<< HEAD
     .connect(process.env.MONGODB_URI)
-=======
-    .connect(process.env.MONGODB_URI, options)
->>>>>>> 22e2886d082dd074f306f4c198433eb2ffc10040
     .then(result => {
         console.log("Connected to Database");
         site.listen(3000);
     })
     .catch(err => {
         console.log(err);
-});
+    });
