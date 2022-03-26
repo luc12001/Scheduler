@@ -88,6 +88,7 @@ exports.approveRequest = (req, res, next) => {};
 exports.denyRequest = (req, res, next) => {};
 
 exports.editDoctorAvailability = (req, res, next) => {const patientId = req.body.patientId;
+    const doctorId = req.body.doctorId;
     const doctorName = req.body.doctorName;
     const doctorAvailability = req.body.doctorAvailability;
 
