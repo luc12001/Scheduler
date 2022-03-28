@@ -5,30 +5,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Health Valley - Login</title>
 </head>
 
-<body>
+<body class="account-page">
+    <!-- Main Wrapper -->
+    <!-- Header -->
+    <!--NAVIGATION BAR-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg header-nav">
+            <div class="navbar-header">
+                <a href="../main.ejs" class="navbar-brand logo">
+                    HealthValley
+                    <!-- <img src="assets/img/logo.png" class="img-fluid" alt="Logo"> -->
+                </a>
+            </div>
+            <div class="main-menu-wrapper">
+                <div class="menu-header">
+                    <a href="../main.ejs" class="menu-logo">
+                        <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+                    </a>
+                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+                <ul class="main-nav">
+                    <li>
+                        <a href="../main.ejs">Home</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="appointments.html">Appointments</a></li>
+                            <li><a href="my-patients.html">Patients List</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="search.html">Search Doctor</a></li>
+                            <li><a href="booking.html">Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Recepcionist<i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="search.html">Search Doctors</a></li>
+                            <li><a href="appointments.html">Appointments</a></li>
+                            <li><a href="my-patients.html">Patients List</a></li>
+                        </ul>
+                    </li>
+                    <li class="login-link">
+                        <a href="../auth/login.ejs">Login / Signup</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav header-navbar-rht">
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="../auth/login.ejs">login / Signup </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- /Header -->
     <main>
         <div class="">Error Message</div>
         <form class="" action="" method="POST">
             <div class="">
-                <label for="email">E-Mail</label>
-                <input 
-                    class=""
-                    type="email" 
-                    name="email" 
-                    id="" 
-                    value="">
+                <label for="username">Username</label>
+                <input class="" type="text" name="username" id="username" value="">
             </div>
             <div class="">
                 <label for="password">Password</label>
-                <input 
-                    class=""
-                    type="password" 
-                    name="password" 
-                    id="" 
-                    value="">
+                <input class="" type="password" name="password" id="" value="">
             </div>
             <input type="hidden" name="" value="">
             <button class="" type="submit">Login</button>

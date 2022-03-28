@@ -1,0 +1,38 @@
+/* HERO BANNER */
+.bgimage {
+    width:96%;
+    height:400px;
+    padding: 0;
+    margin: 0 auto;
+    background: url('https://t4.ftcdn.net/jpg/02/75/88/05/360_F_275880540_UEZz9qPAqlowxiF1XT1gGwJYGf86HAHc.jpg'), rgba(151, 113, 10, 0.322);
+    background-blend-mode:luminosity;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    background-attachment: fixed;
+  }
+  .bgimage h4 {
+    margin: 4% auto;
+    text-align: center;
+    color:rgb(247, 247, 247);
+  }
+
+  .bgimage p {
+    text-align: center;
+    width: 50%;
+    margin: 4% auto;
+    color:rgb(247, 247, 247);
+
+  }
+
+  /*OPTIONS FOR PATIENTS ( DOCTORS AND CREATE APPOINTMENT) - GRID*/
+  .patientOptions {
+    width: 90%;
+    margin: 2% auto;
+  }
+
+  h2 {
+    text-align: center;
+    padding-top: 2%;
+  }
+
