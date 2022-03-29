@@ -13,11 +13,7 @@ exports.getNotes = (req, res, next) => {
         note: [{
             content: "Call Mr Jones"
         }]
-
-
     });
-
-
 };
 
 exports.addNotes = (req, res, next) => {
