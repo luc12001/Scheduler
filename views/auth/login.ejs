@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
     <title>Health Valley - Login</title>
 </head>
 
@@ -30,7 +30,7 @@
             <div class="main-menu-wrapper">
                 <div class="menu-header">
                     <a href="../main.ejs" class="menu-logo">
-                        <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+                        <img src="../../public/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>
@@ -43,23 +43,23 @@
                     <li class="has-submenu">
                         <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
-                            <li><a href="appointments.html">Appointments</a></li>
-                            <li><a href="my-patients.html">Patients List</a></li>
+                            <li><a href="../appointments.ejs">Appointments</a></li>
+                            <li><a href="../my-patients.ejs">Patients List</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu">
                         <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
-                            <li><a href="search.html">Search Doctor</a></li>
-                            <li><a href="booking.html">Booking</a></li>
+                            <li><a href="../searchDoctor.ejs">Search Doctor</a></li>
+                            <li><a href="../appointments.ejs">Book Appointment</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu">
                         <a href="#">Recepcionist<i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
-                            <li><a href="search.html">Search Doctors</a></li>
-                            <li><a href="appointments.html">Appointments</a></li>
-                            <li><a href="my-patients.html">Patients List</a></li>
+                            <li><a href="../searchDoctor.ejs">Search Doctors</a></li>
+                            <li><a href="../appointments.ejs">Appointments</a></li>
+                            <li><a href="../my-patients.ejs">Patients List</a></li>
                         </ul>
                     </li>
                     <li class="login-link">
@@ -89,8 +89,9 @@
             <input type="hidden" name="" value="">
             <button class="" type="submit">Login</button>
         </form>
+        <div>Dont have an account? Please go <a href="./signup.ejs"></a>sign up.</a></div>
         <div class="">
-            <a href="/reset">Reset Password</a>
+            <a href="./newPassword.ejs">Reset Password</a>
         </div>
     </main>
     <!-- Footer -->
@@ -106,14 +107,12 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
     <!-- Bootstrap Core JS -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="../../public/js/popper.min.js"></script>
+    <script src="../../public/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
-</body>
-
+    <script src="../../public/js/script.js"></script>
 </body>
 
 </html>
