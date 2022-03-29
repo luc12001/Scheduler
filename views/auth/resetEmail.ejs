@@ -5,10 +5,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="public/css/style.css">
+    <title>Health Valley - Reset Email</title>
 </head>
 
 <body>
+    <!-- Header -->
+    <!--NAVIGATION BAR-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg header-nav">
+            <div class="navbar-header">
+                <a href="../main.ejs" class="navbar-brand logo">
+                    HealthValley
+                    <!-- <img src="assets/img/logo.png" class="img-fluid" alt="Logo"> -->
+                </a>
+            </div>
+            <div class="main-menu-wrapper">
+                <div class="menu-header">
+                    <a href="../main.ejs" class="menu-logo">
+                        <img src="../../public/img/logo.png" class="img-fluid" alt="Logo">
+                    </a>
+                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+                <ul class="main-nav">
+                    <li>
+                        <a href="../main.ejs">Home</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="../appointments.ejs">Appointments</a></li>
+                            <li><a href="../my-patients.ejs">Patients List</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="../searchDoctor.ejs">Search Doctor</a></li>
+                            <li><a href="../appointments.ejs">Book Appointment</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Recepcionist<i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="../searchDoctor.ejs">Search Doctors</a></li>
+                            <li><a href="../appointments.ejs">Appointments</a></li>
+                            <li><a href="../my-patients.ejs">Patients List</a></li>
+                        </ul>
+                    </li>
+                    <li class="login-link">
+                        <a href="../auth/login.ejs">Login / Signup</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav header-navbar-rht">
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="../auth/login.ejs">login / Signup </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- /Header -->
     <main>
         <div class="">Error Message</div>
         <form class="" action="/reset" method="POST">
@@ -20,6 +85,16 @@
             <button class="btn" type="submit">Reset E-Mail</button>
         </form>
     </main>
+    <!-- Footer -->
+    <footer class="footer bg-light text-center text-white">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- /Footer -->
 </body>
 
 </html>
