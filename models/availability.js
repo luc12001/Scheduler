@@ -21,7 +21,7 @@ const availabilitySchema = new mongoose.Schema({
         required: true
     },
 });
-
+    
 
 availabilitySchema.methods.updateAppointment = function(availability){}
 
