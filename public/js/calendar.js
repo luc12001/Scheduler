@@ -1,8 +1,8 @@
 //Javascript code for the calendar to ensure dates are correctly placed in months.
 
-console.log("Here");
+//console.log("Here");
 //Connecting notes to Calendar using REST APIs...
-const content = document.getElementById('content');
+const content = document.querySelector('input').value;
 const addNote = document.getElementById('addNote');
 const getNote = document.getElementById('getNote');
 
@@ -11,9 +11,13 @@ getNote.addEventListener('click', () => {
 })
 
 addNote.addEventListener('click', () => {
-    //const content = text.JSON().stringify();
+    //const content = req.body.content;
+    console.log(content);
     fetch('http://localhost:3000/doctors/pnote', {
         method: 'POST',
+        /* headers: {
+            'Content-Type': 'application/json'
+        }, */
         body: JSON.stringify(content)
     }).then(res => res.json(content)).then(resData => console.log(resData)).catch(error => console.log(error));
 

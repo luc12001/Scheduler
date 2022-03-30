@@ -7,14 +7,15 @@ const notesSchema = new Schema({
 
     note: {
         type: String,
-        required: true
+        required: true,
+
     },
 
-    patientId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required: true
-    },
+    /*  patientId: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "User",
+         required: true
+     }, */
 
 });
 
