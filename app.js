@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require("express-session");
 const MongoDBSessions = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
 
 //Models
 const notes = require('./models/notes');
@@ -47,16 +48,11 @@ const options = {
 };
 
 //Parser
-site.use(bodyParser.json());
+//site.use(bodyParser.json());
+site.use(express.urlencoded());
 site.use(express.static(path.join(__dirname, "public")));
 
-//Session initializer
-site.use(session({
-    secret: process.env.SESSIONKEY,
-    resave: false,
-    saveUninitialized: false,
-    store: storage
-}));
+
 
 //Allow for cross server client access
 site.use((req, res, next) => {
@@ -69,9 +65,17 @@ site.use((req, res, next) => {
     next();
 });
 
-
 site.set('view engine', 'ejs');
 site.set('views', 'views');
+
+//Session initializer
+site.use(session({
+    secret: process.env.SESSIONKEY,
+    resave: false,
+    saveUninitialized: false,
+    store: storage
+}));
+site.use(flash());
 
 /*******************************************
  * Site Session/Default variables initialization
@@ -85,25 +89,26 @@ site.use((req, res, next) => {
     }
 
     User.findById(req.session.userId)
-        .then(foundUser => {
-            // I do it this way so that req.user does exist still
-            if (!foundUser) {
-                req.user = null;
-            } else {
-                req.user = foundUser;
-            }
-            next();
-        }).catch(error => {
-            console.log("Error in finding the user in the database.");
-            console.log(error);
+    .then(foundUser => {
+        // I do it this way so that req.user does exist still
+        if (!foundUser) {
             req.user = null;
-            return next();
-        });
-
+        } else {
+            req.user = foundUser;
+        }
+        next();
+    }).catch(error => {
+        console.log("Error in finding the user in the database.");
+        console.log(error);
+        req.user = null;
+        return next();
+    });
+    
 });
 
 site.use((req, res, next) => {
-    res.locals.errorMessage = request.flash("error")[0];
+    res.locals.errorMessage = req.flash("error")[0];
+    next();
 });
 
 /*******************************************
@@ -145,9 +150,9 @@ mongoose
 // .connect(process.env.MONGODB_URI)
     .connect("mongodb+srv://website:adminUser@cluster0.o8hvm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then(result => {
-        console.log("Connected to Database");
         site.listen(3000);
+        console.log("Connected to Database");
     })
     .catch(err => {
         console.log(err);
-    });
+});

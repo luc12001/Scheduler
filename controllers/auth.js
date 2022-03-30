@@ -1,6 +1,6 @@
 //The logic for authenticating someone, signing up, and logging in
 const encryption = require("bcryptjs");
-const { response } = require("express");
+const validator = require("express-validator");
 
 const User = require("../models/user");
 
@@ -24,32 +24,38 @@ exports.logInPost = (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
+    console.log(username);
+
     User.findOne({username: username})
     .then(user => {
         //If a user wasn't found
         if(!user){
             //Temporary until there is a better way of showing an error
-            console.log("User not found");
-            throw "User not found";
+            req.flash("error", "Username or password are incorrect");
+            res.redirect("/login");
         } else {
 
             //Only the hash is stored in the database
             //So we only need to compare hashes.
-            let success = encryption.compare(password, user.password);
-            if(success){
-                //req.session.userId = user._id;
-                console.log("Login successful");
-                return response.redirect("/")
-            } else {
-                throw "User not found"
-            }
+            encryption.compare(password, user.password)
+            .then(success => {
+                if(success){
+                    req.session.userId = user._id;
+                    console.log(req.session.userId);
+                    console.log("Login successful");
+                    return res.redirect("/")
+                } else {
+                    req.flash("error", "Username or password are incorrect");
+                    res.redirect("/login");
+                }
+            });
         }
 
     }).catch(error => {
         //logic for error handling
     })
 
-
+    //res.redirect("/");
 };
 
 /**********************************
@@ -79,25 +85,40 @@ exports.signUpPost = (req, res, next) => {
     const confirmPassword = req.body.confirmPassword;
     const email = req.body.email;
     const firstName = req.body.firstName;
-    const lastName = req.lastName;
+    const lastName = req.body.lastName;
     const address = req.body.homeAddress;
     const mail = req.body.mailingAddress;
     const phone = req.body.phoneNumber;
 
-    if(password != confirmPassword){
-        throw new Error("Both passwords need to match");
+    console.log(username);
+
+    const errors = validator.validationResult(req);
+
+    if(!errors.isEmpty()){
+        let message = "";
+        let knownErrors = errors.array();
+        //console.log(knownErrors);
+        for(let error of knownErrors){
+            message += error.msg + "<br>";
+        }
+
+
+        return res.status(422).render("auth/signup", {
+            errorMessage: message
+        });
     }
 
     User.findOne({username: username})
     .then(foundUser => {
         if(foundUser){
             //Error
-            throw new Error("Username already exists");
+            req.flash("error", "Username already exists");
+            res.redirect("/login");
         }
 
-        let hashed = encryption.hash(password, 12)
-
-        const newUser = new User({
+        encryption.hash(password, 12)
+        .then(hashed => {
+            const newUser = new User({
             username: username,
             password: hashed,
             info: {
@@ -109,7 +130,17 @@ exports.signUpPost = (req, res, next) => {
                 mail: mail
             }
         });
-    }).catch(error => {
+
+        return newUser.save();
+        });
+
+        
+    }).then(result => {
+        console.log(result);
+        res.redirect("/");
+    })
+    .catch(error => {
+        console.log(error);
         throw new Error(error);
     });
 
