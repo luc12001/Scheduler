@@ -140,6 +140,7 @@ site.use("/doctors", doctorsRoute);
 });*/
 
 site.use("/", authRoute, (req, res, next) => {
+    console.log("Here");
     res.render("main");
 });
 
@@ -150,7 +151,7 @@ site.use("/", authRoute, (req, res, next) => {
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(result => {
-        site.listen(3000);
+        site.listen(PORT);
         console.log("Connected to Database");
     })
     .catch(err => {
