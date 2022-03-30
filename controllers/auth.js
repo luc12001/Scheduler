@@ -1,6 +1,5 @@
 //The logic for authenticating someone, signing up, and logging in
 const encryption = require("bcryptjs");
-const { response } = require("express");
 const validator = require("express-validator");
 
 const User = require("../models/user");
@@ -38,22 +37,25 @@ exports.logInPost = (req, res, next) => {
 
             //Only the hash is stored in the database
             //So we only need to compare hashes.
-            let success = encryption.compare(password, user.password);
-            if(success){
-                //req.session.userId = user._id;
-                console.log("Login successful");
-                return response.redirect("/")
-            } else {
-                req.flash("error", "Username or password are incorrect");
-                res.redirect("/login");
-            }
+            encryption.compare(password, user.password)
+            .then(success => {
+                if(success){
+                    req.session.userId = user._id;
+                    console.log(req.session.userId);
+                    console.log("Login successful");
+                    return res.redirect("/")
+                } else {
+                    req.flash("error", "Username or password are incorrect");
+                    res.redirect("/login");
+                }
+            });
         }
 
     }).catch(error => {
         //logic for error handling
     })
 
-    res.redirect("/");
+    //res.redirect("/");
 };
 
 /**********************************
@@ -134,6 +136,7 @@ exports.signUpPost = (req, res, next) => {
 
         
     }).then(result => {
+        console.log(result);
         res.redirect("/");
     })
     .catch(error => {

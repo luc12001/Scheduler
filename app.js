@@ -52,14 +52,7 @@ const options = {
 site.use(express.urlencoded());
 site.use(express.static(path.join(__dirname, "public")));
 
-//Session initializer
-site.use(session({
-    secret: process.env.SESSIONKEY,
-    resave: false,
-    saveUninitialized: false,
-    store: storage
-}));
-site.use(flash());
+
 
 //Allow for cross server client access
 site.use((req, res, next) => {
@@ -72,9 +65,17 @@ site.use((req, res, next) => {
     next();
 });
 
-
 site.set('view engine', 'ejs');
 site.set('views', 'views');
+
+//Session initializer
+site.use(session({
+    secret: process.env.SESSIONKEY,
+    resave: false,
+    saveUninitialized: false,
+    store: storage
+}));
+site.use(flash());
 
 /*******************************************
  * Site Session/Default variables initialization
@@ -88,21 +89,20 @@ site.use((req, res, next) => {
     }
 
     User.findById(req.session.userId)
-        .then(foundUser => {
-            // I do it this way so that req.user does exist still
-            if (!foundUser) {
-                req.user = null;
-            } else {
-                req.user = foundUser;
-                console.log(foundUser);
-            }
-            next();
-        }).catch(error => {
-            console.log("Error in finding the user in the database.");
-            console.log(error);
+    .then(foundUser => {
+        // I do it this way so that req.user does exist still
+        if (!foundUser) {
             req.user = null;
-            return next();
-        });
+        } else {
+            req.user = foundUser;
+        }
+        next();
+    }).catch(error => {
+        console.log("Error in finding the user in the database.");
+        console.log(error);
+        req.user = null;
+        return next();
+    });
     
 });
 
