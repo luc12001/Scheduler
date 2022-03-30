@@ -13,6 +13,7 @@ const User = require("./models/user");
 //Routes
 const receptionRoute = require('./routes/receptionists');
 const doctorsRoute = require('./routes/doctors');
+const authRoute = require('./routes/auth');
 
 
 
@@ -79,23 +80,23 @@ site.set('views', 'views');
 //Getting user from the session's user ID
 site.use((req, res, next) => {
     if (!req.session.userId) {
-        request.user = null;
+        req.user = null;
         return next();
     }
 
-    User.findById(request.session.userId)
+    User.findById(req.session.userId)
         .then(foundUser => {
-            // I do it this way so that request.user does exist still
+            // I do it this way so that req.user does exist still
             if (!foundUser) {
-                request.user = null;
+                req.user = null;
             } else {
-                request.user = foundUser;
+                req.user = foundUser;
             }
             next();
         }).catch(error => {
             console.log("Error in finding the user in the database.");
             console.log(error);
-            request.user = null;
+            req.user = null;
             return next();
         });
 
@@ -118,7 +119,7 @@ site.use("/doctors", doctorsRoute);
  * Site Router
  * ****************************************/
 
-site.use("/", (req, res, next) => {
+/*site.use("/", (req, res, next) => {
 
     res.write('<html>');
     res.write('<body>');
@@ -126,6 +127,10 @@ site.use("/", (req, res, next) => {
     res.write('</body>');
     res.write('</html>');
     return res.end();
+});*/
+
+site.use("/", authRoute, (req, res, next) => {
+    res.render("main");
 });
 
 

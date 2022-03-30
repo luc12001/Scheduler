@@ -77,17 +77,9 @@ exports.setAppointment = (req, res, next) => {
     res.render('users/receptionist');
 };
 
-exports.addUser = (req, res, next) => {};
 
-exports.assignRole = (req, res, next) => {};
-
-exports.getAllPendingRequests = (req, res, next) => {};
-
-exports.approveRequest = (req, res, next) => {};
-
-exports.denyRequest = (req, res, next) => {};
-
-exports.editDoctorAvailability = (req, res, next) => {const patientId = req.body.patientId;
+exports.editDoctorAvailability = (req, res, next) => {
+    const patientId = req.body.patientId;
     const doctorId = req.body.doctorId;
     const doctorName = req.body.doctorName;
     const doctorAvailability = req.body.doctorAvailability;
@@ -124,6 +116,21 @@ exports.editDoctorAvailability = (req, res, next) => {const patientId = req.body
         })
         .catch(err => {
             const error = new Error(err);
-            error.httpStatusCode = 500;
+            e
+
+            exports.addUser = (req, res, next) => {};
+
+            exports.assignRole = (req, res, next) => {};
+
+            exports.getAllPendingRequests = (req, res, next) => {};
+
+            exports.approveRequest = (req, res, next) => {};
+
+            exports.denyRequest = (req, res, next) => {};
+            rror.httpStatusCode = 500;
             return next(error);
-        });};
+        });
+};
+//return next(error);
+//});
+//};

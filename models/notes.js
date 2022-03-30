@@ -7,14 +7,15 @@ const notesSchema = new Schema({
 
     note: {
         type: String,
-        required: true
-            /* noteId: {
-                type: Schema.Types.ObjectId,
-                required: true
-            } */
-    }
+        required: true,
 
-    //This is where the layout of the user object will go
+    },
+
+    /*  patientId: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "User",
+         required: true
+     }, */
 
 });
 

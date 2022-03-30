@@ -13,27 +13,55 @@ exports.getNotes = (req, res, next) => {
         note: [{
             content: "Call Mr Jones"
         }]
-
-
     });
-
-
 };
 
 exports.addNotes = (req, res, next) => {
 
     const content = req.body.content;
-    console.log(content);
-    //Create in DB
+
     res.status(201).json({
         message: "Note successfully added",
         note: {
-            id: new Date().toISOString(),
+            //id: new Date().toISOString(),
             content: content
         }
     });
-    console.log(res);
+    /* const note = new Note({
+        content: content,
+        //patientId: patientId
+    }); */
+    /* note.save().then(result => {
+        console.log(result);
+        res.status(201).json({
+            message: "Note successfully added",
+            note: {
+                //id: new Date().toISOString(),
+                content: result
+            },
+            /* patientId: {
+                ref: "User"
+            } */
+    /* });
+    }).catch(err => {
+        console.log(err);
+    })
+
+    console.log(res);* */
+
 }
+
+/* const content = req.body.content;
+//console.log(content);
+//Create in DB
+res.status(201).json({
+    message: "Note successfully added",
+    note: {
+        id: new Date().toISOString(),
+        content: content
+    }
+});
+console.log(res); */
 
 /* const content = req.body.content;
 

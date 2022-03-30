@@ -11,7 +11,7 @@ router.get('/admin/admin', adminController.admin);
 
 module.exports = router;
 
-exports.availability = (req, res, next) => {
+/*exports.availability = (req, res, next) => {
 
 };
 
@@ -91,4 +91,4 @@ exports.addUser = (req, res, next) => {
 
 exports.addNotes = (req, res, next) => {
 
-};
+};*/
