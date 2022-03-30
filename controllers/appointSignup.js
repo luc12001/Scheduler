@@ -76,7 +76,7 @@ exports.editAppointmentRequest = (req, res, next) => {
             path: '/admin/edit-appointment-request',
             editing: true,
             hasError: true,
-            product: {
+            appointment: {
                 patientName: updatedPatientName,
                 appointmentDate: updatedAppointmentDate,
                 appointmentReason: updatedAppointmentReason,
