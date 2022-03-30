@@ -7,13 +7,13 @@ const addNote = document.getElementById('addNote');
 const getNote = document.getElementById('getNote');
 
 getNote.addEventListener('click', () => {
-    fetch('http://localhost:3000/doctors/note').then(res => res.json()).then(resData => console.log(resData)).catch(error => console.log(error));
+    fetch('/doctors/note').then(res => res.json()).then(resData => console.log(resData)).catch(error => console.log(error));
 })
 
 addNote.addEventListener('click', () => {
     //const content = req.body.content;
     console.log(content);
-    fetch('http://localhost:3000/doctors/pnote', {
+    fetch('/doctors/pnote', {
         method: 'POST',
         /* headers: {
             'Content-Type': 'application/json'

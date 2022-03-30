@@ -108,6 +108,7 @@ site.use((req, res, next) => {
 
 site.use((req, res, next) => {
     res.locals.errorMessage = req.flash("error")[0];
+    res.locals.isLoggedIn = !(!req.session.userId);
     next();
 });
 

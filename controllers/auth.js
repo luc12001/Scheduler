@@ -16,6 +16,11 @@ const User = require("../models/user");
  *      password
  * *******************************/
 
+exports.logoutPost = (req, res, next) => {
+    req.session.userId = undefined;
+    return res.redirect("/");
+}
+
 exports.logInGet = (req, res, next) => {
     res.render("auth/login");
 }

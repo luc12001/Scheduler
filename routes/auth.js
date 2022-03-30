@@ -27,5 +27,6 @@ router.post("/signup", [
     }})
 ] , authController.signUpPost);
 
+router.post("/logout", authController.logoutPost);
 
 module.exports = router;
