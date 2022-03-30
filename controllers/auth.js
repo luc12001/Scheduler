@@ -15,6 +15,11 @@ const User = require("../models/user");
  *      username
  *      password
  * *******************************/
+
+exports.logInGet = (req, res, next) => {
+    res.render("auth/login");
+}
+
 exports.logInPost = (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -29,7 +34,7 @@ exports.logInPost = (req, res, next) => {
 
             //Only the hash is stored in the database
             //So we only need to compare hashes.
-            let success = await encryption.compare(password, user.password);
+            let success = encryption.compare(password, user.password);
             if(success){
                 //req.session.userId = user._id;
                 return response.redirect("/")
@@ -61,17 +66,24 @@ exports.logInPost = (req, res, next) => {
  *      address
  *      phone
  * *******************************/
+
+ exports.signUpGet = (req, res, next) => {
+    res.render("auth/signup");
+}
 exports.signUpPost = (req, res, next) => {
 
     const username = req.body.username;
     const password = req.body.password;
-    //Need to figure out how to do roles
-    //const role = "Patient";
+    const confirmPassword = req.body.confirmpassword
     const email = req.body.email;
     const firstName = req.body.firstName;
     const lastName = req.lastName;
     const address = req.body.address;
     const phone = req.body.phone;
+
+    if(password != confirmPassword){
+        throw new Error("Both passwords need to match");
+    }
 
     User.findOne({username: username})
     .then(foundUser => {
@@ -80,15 +92,19 @@ exports.signUpPost = (req, res, next) => {
             throw new Error("Username already exists");
         }
 
+        let hashed = encryption.hash(password, 12)
+
         const newUser = new User({
             username: username,
-            password: await encryption.hash(password, 12),
-            email: email
+            password: hashed,
+            info: {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                address: address,
+                phone: phone
+            }
         });
-
-        
-
-
     }).catch(error => {
         throw new Error(error);
     });

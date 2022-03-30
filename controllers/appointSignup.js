@@ -46,7 +46,7 @@ exports.appointmentRequest = (req, res, next) => {
         appointmentDate: appointmentDate,
         appointmentReason: appointmentReason,
         appointmentRequestId: appointmentRequestId,
-        userId: req.user
+        userId: userId
     });
     appointment
         .save()

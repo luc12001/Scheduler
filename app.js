@@ -13,6 +13,7 @@ const User = require("./models/user");
 //Routes
 const receptionRoute = require('./routes/receptionists');
 const doctorsRoute = require('./routes/doctors');
+const authRoute = require('./routes/auth');
 
 
 
@@ -118,7 +119,7 @@ site.use("/doctors", doctorsRoute);
  * Site Router
  * ****************************************/
 
-site.use("/", (req, res, next) => {
+/*site.use("/", (req, res, next) => {
 
     res.write('<html>');
     res.write('<body>');
@@ -126,6 +127,10 @@ site.use("/", (req, res, next) => {
     res.write('</body>');
     res.write('</html>');
     return res.end();
+});*/
+
+site.use("/", authRoute, (req, res, next) => {
+    res.render("main");
 });
 
 
@@ -140,4 +145,5 @@ mongoose
     })
     .catch(err => {
         console.log(err);
-    });
+});
+

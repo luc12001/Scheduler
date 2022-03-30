@@ -1,5 +1,6 @@
 //Javascript code for the calendar to ensure dates are correctly placed in months.
 
+console.log("Here");
 //Connecting notes to Calendar using REST APIs...
 const content = document.getElementById('content');
 const addNote = document.getElementById('addNote');
@@ -174,6 +175,7 @@ window.onload = function() {
     getId('btnPrev').onclick = function() {
         c.previousMonth();
     };
+
 }
 
 // Get element by id
