@@ -37,7 +37,6 @@ appointmentSchema.methods.setApointmentRequest = function(start, end, patient, d
     this.save()
         .then(result => {
             return true;
-
         }).catch(error => {
             console.log(error);
             return false;
@@ -46,19 +45,36 @@ appointmentSchema.methods.setApointmentRequest = function(start, end, patient, d
 
 appointmentSchema.methods.approveRequest = function(isApproved) {
     this.approved = isApproved;
+    return this.save();
+
+}
+
+appointmentSchema.methods.updateAppointment = function(appointment) {
+    this.endTime = appointment.endTime;
+    this.startTime = appointment.startTime;
+    this.patientId = appointment.patientId;
+    this.doctorId = appointment.doctorId;
     this.save()
         .then(result => {
             return true;
-
         }).catch(error => {
             console.log(error);
             return false;
         });
-
 }
 
-appointmentSchema.methods.updateAppointment = function(appointment) {}
-
-appointmentSchema.methods.updateAppointmentRequest = function(apointment) {}
+appointmentSchema.methods.updateAppointmentRequest = function(apointment) {
+    this.endTime = appointment.endTime;
+    this.startTime = appointment.startTime;
+    // this.patientId = appointment.patientId; // you cannot update the patient
+    this.doctorId = appointment.doctorId;
+    this.save()
+        .then(result => {
+            return true;
+        }).catch(error => {
+            console.log(error);
+            return false;
+        });
+}
 
 module.exports = mongoose.model("Appointment", appointmentSchema);
