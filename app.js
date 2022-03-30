@@ -102,6 +102,10 @@ site.use((req, res, next) => {
 
 });
 
+site.use((req, res, next) => {
+    res.locals.errorMessage = request.flash("error")[0];
+});
+
 /*******************************************
  * Site Routing
  * ****************************************/

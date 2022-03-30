@@ -29,6 +29,7 @@ exports.logInPost = (req, res, next) => {
         //If a user wasn't found
         if(!user){
             //Temporary until there is a better way of showing an error
+            console.log("User not found");
             throw "User not found";
         } else {
 
@@ -37,6 +38,7 @@ exports.logInPost = (req, res, next) => {
             let success = encryption.compare(password, user.password);
             if(success){
                 //req.session.userId = user._id;
+                console.log("Login successful");
                 return response.redirect("/")
             } else {
                 throw "User not found"
@@ -74,12 +76,13 @@ exports.signUpPost = (req, res, next) => {
 
     const username = req.body.username;
     const password = req.body.password;
-    const confirmPassword = req.body.confirmpassword
+    const confirmPassword = req.body.confirmPassword;
     const email = req.body.email;
     const firstName = req.body.firstName;
     const lastName = req.lastName;
-    const address = req.body.address;
-    const phone = req.body.phone;
+    const address = req.body.homeAddress;
+    const mail = req.body.mailingAddress;
+    const phone = req.body.phoneNumber;
 
     if(password != confirmPassword){
         throw new Error("Both passwords need to match");
@@ -102,7 +105,8 @@ exports.signUpPost = (req, res, next) => {
                 lastName: lastName,
                 email: email,
                 address: address,
-                phone: phone
+                phone: phone,
+                mail: mail
             }
         });
     }).catch(error => {
