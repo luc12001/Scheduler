@@ -11,7 +11,7 @@ exports.getAppointments = (req, res, next) => {
 exports.getNotes = (req, res, next) => {
     res.status(200).json({
         note: [{
-            content: "Call Mr Jones"
+            content: "Call Mr Smith"
         }]
     });
 };

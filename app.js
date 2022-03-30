@@ -108,6 +108,7 @@ site.use((req, res, next) => {
 
 site.use((req, res, next) => {
     res.locals.errorMessage = req.flash("error")[0];
+    res.locals.isLoggedIn = !(!req.session.userId);
     next();
 });
 
@@ -139,6 +140,7 @@ site.use("/doctors", doctorsRoute);
 });*/
 
 site.use("/", authRoute, (req, res, next) => {
+    console.log("Here");
     res.render("main");
 });
 
@@ -150,7 +152,7 @@ mongoose
 // .connect(process.env.MONGODB_URI)
     .connect("mongodb+srv://website:adminUser@cluster0.o8hvm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then(result => {
-        site.listen(3000);
+        site.listen(PORT);
         console.log("Connected to Database");
     })
     .catch(err => {
