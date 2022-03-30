@@ -41,8 +41,6 @@ exports.logInPost = (req, res, next) => {
             .then(success => {
                 if(success){
                     req.session.userId = user._id;
-                    console.log(req.session.userId);
-                    console.log("Login successful");
                     return res.redirect("/")
                 } else {
                     req.flash("error", "Username or password are incorrect");
