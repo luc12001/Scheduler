@@ -149,8 +149,7 @@ site.use("/", authRoute, (req, res, next) => {
 //site.listen(PORT);
 
 mongoose
-// .connect(process.env.MONGODB_URI)
-    .connect("mongodb+srv://website:adminUser@cluster0.o8hvm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    .connect(process.env.MONGODB_URI)
     .then(result => {
         site.listen(PORT);
         console.log("Connected to Database");

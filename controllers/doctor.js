@@ -1,11 +1,34 @@
 //The logic for doctor Pages
 //import Notes model
 const Note = require('../models/notes');
+const User = require('../models/user');
 
-
+exports.getDoctors = (req, res, next) => {
+    User.find({ role: "DOCTOR" })
+        .then(doctors => {
+            res.render('users/doctor', {
+                docs: doctors,
+                pageTitle: 'All Doctors',
+                path: '/doctors'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 exports.getAppointments = (req, res, next) => {
-    //console.log('doctors page!!');
-    res.render('users/doctor');
+    User.find()
+        .then(doctors => {
+            console.log(doctors);
+            res.render('users/doctor', {
+                docs: doctors,
+                pageTitle: 'All Doctors',
+                path: '/doctors'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 exports.getNotes = (req, res, next) => {

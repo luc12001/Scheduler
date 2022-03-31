@@ -8,6 +8,6 @@ const doctorController = require('../controllers/doctor');
 router.get('/note', doctorController.getNotes);
 router.post('/pnote', doctorController.addNotes);
 
-router.get('/', doctorController.getAppointments);
+router.get('/', doctorController.getDoctors);
 
 module.exports = router;
