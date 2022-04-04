@@ -140,7 +140,6 @@ site.use("/doctors", doctorsRoute);
 });*/
 
 site.use("/", authRoute, (req, res, next) => {
-    console.log("Here");
     res.render("main");
 });
 

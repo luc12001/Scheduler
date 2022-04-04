@@ -133,14 +133,22 @@ exports.signUpPost = (req, res, next) => {
                 mail: mail
             }
         });
-
         return newUser.save();
         });
 
         
     }).then(result => {
-        console.log(result);
-        res.redirect("/");
+
+        User.findOne({username: username})
+        .then(myUser => {
+
+            if(myUser){
+                req.session.userId = myUser._id;
+                return res.redirect("/");
+            } else {
+                return res.redirect("/login");
+            }
+        });
     })
     .catch(error => {
         console.log(error);

@@ -12,7 +12,7 @@ router.post("/login", authController.logInPost);
 router.get('/signup', authController.signUpGet);
 router.post("/signup", [
     check("username").custom((value, {req}) => {
-        return User.findOne({name: req.body.username})
+        return User.findOne({username: req.body.username})
         .then(user => {
             if(user){
                 return Promise.reject("Username is already taken");
