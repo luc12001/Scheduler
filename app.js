@@ -89,21 +89,21 @@ site.use((req, res, next) => {
     }
 
     User.findById(req.session.userId)
-    .then(foundUser => {
-        // I do it this way so that req.user does exist still
-        if (!foundUser) {
+        .then(foundUser => {
+            // I do it this way so that req.user does exist still
+            if (!foundUser) {
+                req.user = null;
+            } else {
+                req.user = foundUser;
+            }
+            next();
+        }).catch(error => {
+            console.log("Error in finding the user in the database.");
+            console.log(error);
             req.user = null;
-        } else {
-            req.user = foundUser;
-        }
-        next();
-    }).catch(error => {
-        console.log("Error in finding the user in the database.");
-        console.log(error);
-        req.user = null;
-        return next();
-    });
-    
+            return next();
+        });
+
 });
 
 site.use((req, res, next) => {
@@ -155,4 +155,4 @@ mongoose
     })
     .catch(err => {
         console.log(err);
-});
+    });

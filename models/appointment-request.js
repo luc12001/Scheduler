@@ -1,34 +1,31 @@
-//Schema and helper functions for the apointment object
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 
-const appointmentSchema = new mongoose.Schema({
-
-    doctorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-    patientId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-
-    startTime: {
-        type: Date,
-        required: true
-    },
-
-    endTime: {
-        type: Date,
-        required: true
-    },
-
-    approved: Bool
-
+const appointmentRequestSchema = new Schema({
+    appointments: [{
+        doctorId: {
+            type: Schema.Types.ObjectId,
+            required: true
+        },
+        startTime: {
+            type: Date,
+            required: true
+        },
+        endTime: {
+            type: Date,
+            required: true
+        },
+        patientId: {
+            type: Schema.Types.ObjectId,
+            required: true
+        },
+        status: {
+            type: String,
+            required: true
+        }
+    }]
 });
-
 appointmentSchema.methods.setApointmentRequest = function(start, end, patient, doctor) {
     this.endTime = end;
     this.startTime = start;
@@ -44,8 +41,14 @@ appointmentSchema.methods.setApointmentRequest = function(start, end, patient, d
 }
 
 appointmentSchema.methods.approveRequest = function(isApproved) {
-    this.approved = isApproved;
-    return this.save();
+    this.status = isApproved ? "Approved" : "Rejected";
+    this.save()
+        .then(result => {
+            return true;
+        }).catch(error => {
+            console.log(error);
+            return false;
+        });
 
 }
 
@@ -66,7 +69,7 @@ appointmentSchema.methods.updateAppointment = function(appointment) {
 appointmentSchema.methods.updateAppointmentRequest = function(apointment) {
     this.endTime = appointment.endTime;
     this.startTime = appointment.startTime;
-    // this.patientId = appointment.patientId; // you cannot update the patient
+    this.patientId = appointment.patientId;
     this.doctorId = appointment.doctorId;
     this.save()
         .then(result => {
@@ -77,4 +80,22 @@ appointmentSchema.methods.updateAppointmentRequest = function(apointment) {
         });
 }
 
-module.exports = mongoose.model("Appointment", appointmentSchema);
+appointmentSchema.methods.aproveRequest = function(appointment, isAproved) {}
+
+appointmentSchema.methods.updateAppointment = function(appointment) {}
+
+appointmentSchema.methods.updateAppointmentRequest = function(apointment) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = mongoose.model('appointmentRequests', orderSchema);
